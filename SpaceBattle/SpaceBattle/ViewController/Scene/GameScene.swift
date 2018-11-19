@@ -118,11 +118,12 @@ extension GameScene {
         
         bullet.zPosition = 1
         bullet.position = spriteNode.position
-        bullet.run(sequenceBulletAction(with: bullet))
         
-        bulletEffect(for: bullet, with: GameConstant.Effect.ShootTrailBlue.rawValue)
+        if let effect = bulletEffect(for: bullet, with: GameConstant.Effect.ShootTrailBlue.rawValue) {
+            bullet.run(sequenceBulletAction(with: bullet, skNode: effect))
+        }
+        
         playSound(with: GameConstant.Sound.torpedo.rawValue)
-        
         addChild(bullet)
     }
 }
@@ -200,16 +201,22 @@ extension GameScene {
     /// 完整的敵人動作路徑
     private func sequenceAlienAction(with spriteNode: SKSpriteNode) -> SKAction {
         
-        let action = SKAction.sequence([moveAlienAction(with: spriteNode, frame: frame), SKAction.removeFromParent()])
+        let action = SKAction.sequence(
+            [moveAlienAction(with: spriteNode, frame: frame),
+             SKAction.removeFromParent()]
+        )
         return action
     }
     
     /// 完整的子彈動作路徑
-    private func sequenceBulletAction(with spriteNode: SKSpriteNode) -> SKAction {
+    private func sequenceBulletAction(with spriteNode: SKSpriteNode, skNode: SKNode) -> SKAction {
         
         let action = SKAction.sequence([
             moveBulletAction(with: spriteNode, frame: frame),
-            SKAction.run({spriteNode.removeFromParent()})
+            SKAction.run({
+                spriteNode.removeFromParent()
+                skNode.removeFromParent()
+            })
         ])
         
         return action
@@ -278,7 +285,7 @@ extension GameScene {
         
         bodyA.physicsBody?.categoryBitMask = PhysicsCategory.None
         bodyA.removeFromParent()
-        
+
         emitterEffect(for: bodyA, with: GameConstant.Effect.ExplosionBlue.rawValue, isGameOver: isGameOver)
         playSound(with: GameConstant.Sound.explosion.rawValue)
         
@@ -304,12 +311,12 @@ extension GameScene {
     }
     
     /// 子彈的效果
-    private func bulletEffect(for bullet: SKSpriteNode, with effect: String) {
+    private func bulletEffect(for bullet: SKSpriteNode, with effect: String) -> SKNode? {
         
         guard let trailNode = Optional.some(SKNode()),
               let emitter = SKEmitterNode.init(fileNamed: effect)
         else {
-            return
+            return nil
         }
         
         trailNode.zPosition = 1
@@ -317,6 +324,8 @@ extension GameScene {
         
         bullet.addChild(emitter)
         addChild(trailNode)
+        
+        return trailNode
     }
     
     /// 計算主機現在的所在位置
