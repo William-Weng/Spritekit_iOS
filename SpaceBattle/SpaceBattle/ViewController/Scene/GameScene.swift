@@ -284,7 +284,9 @@ extension GameScene {
     private func hitAliens(bodyA: SKSpriteNode, bodyB: SKSpriteNode) {
         
         bodyA.physicsBody?.categoryBitMask = PhysicsCategory.None
+        bodyB.physicsBody?.categoryBitMask = PhysicsCategory.None
         bodyA.removeFromParent()
+        bodyB.removeFromParent()
 
         emitterEffect(for: bodyA, with: GameConstant.Effect.ExplosionBlue.rawValue, isGameOver: isGameOver)
         playSound(with: GameConstant.Sound.explosion.rawValue)
