@@ -14,8 +14,7 @@ class GameScene: SKScene {
     let randomIndex = GKShuffledDistribution(lowestValue: 1, highestValue: 5)
 
     override func didMove(to view: SKView) {
-        let safeEgdeRange = CGRect(origin: CGPoint(x: frame.origin.x + 50, y: frame.origin.y + 50), size: frame.size)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: safeEgdeRange)
+        initSceneBounds()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -24,7 +23,14 @@ class GameScene: SKScene {
     }
 }
 
+// MARK: - 小工具
 extension GameScene {
+    
+    /// 設定Scene的邊界
+    private func initSceneBounds() {
+        let safeEgdeRange = CGRect(origin: CGPoint(x: frame.origin.x + 50, y: frame.origin.y + 50), size: frame.size)
+        physicsBody = SKPhysicsBody(edgeLoopFrom: safeEgdeRange)
+    }
     
     /// 隨機的Bird方塊
     private func randomBird(for touch: UITouch) {

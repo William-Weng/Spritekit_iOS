@@ -32,6 +32,7 @@ extension GameScene {
         myLabel.fontColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1)
         myLabel.fontSize = 128.0
         myLabel.fontName = "Chalkduster"
+        myLabel.zPosition = 1
 
         addChild(myLabel)
     }
