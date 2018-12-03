@@ -30,7 +30,7 @@ class TileMapNode: SKNode {
 
 extension TileMapNode {
     
-    /// 製作地圖
+    /// 製作地圖 (跑雙迴圈)
     private func mapNodeSetting(tileSize: CGSize, tileCodes: [String]) {
         
         for (indexRow, tileCode) in tileCodes.enumerated() {

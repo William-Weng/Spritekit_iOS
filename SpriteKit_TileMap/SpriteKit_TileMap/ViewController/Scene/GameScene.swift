@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     lazy var tileCode: [String] = { return GameUtility.readMapCodes(withFileName: "Map.txt") }()
-        
+    
     override func didMove(to view: SKView) {
         addChild(mapNodes(ForCode: tileCode))
     }

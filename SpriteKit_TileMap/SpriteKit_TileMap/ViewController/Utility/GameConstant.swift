@@ -25,9 +25,7 @@ class GameConstant {
 extension GameConstant.MapTextureCode {
     
     /* 材質 */
-    var texture: SKTexture {
-        get { return findTexture() }
-    }
+    var texture: SKTexture { get { return findTexture() } }
     
     /// 取得對應的材質
     private func findTexture() -> SKTexture {
