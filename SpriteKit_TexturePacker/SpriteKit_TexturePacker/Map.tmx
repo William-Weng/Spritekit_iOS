@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="Atlasc.1.tsx"/>
+ <layer id="1" name="圖塊層 1" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzzkKACAQBEGv/79ZzRZDDUSpgs5nUgIAAHhDG5WldnXRnp9+1JAfd83NOfTqDwAAAAAAONEBLOgAVA==
+  </data>
+ </layer>
+</map>
