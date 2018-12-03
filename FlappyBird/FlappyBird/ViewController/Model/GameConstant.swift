@@ -13,6 +13,9 @@ class GameConstant: NSObject {
     /* 最大的場景大小 */
     static let MaxSceneSize = CGSize.init(width: 1334, height: 750)
     
+    /* 全體的zIndex */
+    static let zPosition: CGFloat = 2
+    
     /* 有幾個場景 */
     static let SceneNunbers:CGFloat = 2.0
     
@@ -25,6 +28,7 @@ class GameConstant: NSObject {
         case floor = "floor"
         case background = "background"
         case mainCamera = "mainCamera"
+        case obstacle = "obstacle"
     }
     
     /* 場景名稱 */
