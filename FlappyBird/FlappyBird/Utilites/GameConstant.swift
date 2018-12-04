@@ -29,11 +29,23 @@ class GameConstant: NSObject {
         case background = "background"
         case mainCamera = "mainCamera"
         case obstacle = "obstacle"
+        case scoreLabel = "//scoreLabel"
+        case highedScoreLabel = "//highedScoreLabel"
     }
     
     /* 場景名稱 */
     enum SceneName: String {
         case game = "GameScene.sks"
+    }
+    
+    /* 音樂 */
+    enum Music: String {
+        case background = "Bensound-Buddy.mp3"
+    }
+    
+    /* 音效 */
+    enum Sound: String {
+        case rising = "UpRising.mp3"
     }
     
     /* 光影特效名稱 */
@@ -46,3 +58,4 @@ class GameConstant: NSObject {
         case penguin = "Penguin.atlas"
     }
 }
+

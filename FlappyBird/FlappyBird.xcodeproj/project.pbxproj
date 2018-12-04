@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		641C10E121B5286B00448A1C /* Obstacle.png in Resources */ = {isa = PBXBuildFile; fileRef = 641C10E021B5286A00448A1C /* Obstacle.png */; };
+		6485246F21B63269005879B4 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6485246E21B63269005879B4 /* GameHelper.swift */; };
+		6485247121B63BF4005879B4 /* Bensound-Buddy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6485247021B63BF4005879B4 /* Bensound-Buddy.mp3 */; };
+		6485247D21B64CBD005879B4 /* MySpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6485247C21B64CBD005879B4 /* MySpriteNode.swift */; };
+		6485247F21B65F6E005879B4 /* UpRising.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6485247E21B65F6E005879B4 /* UpRising.mp3 */; };
+		6485248221B66D76005879B4 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = 6485248121B66D76005879B4 /* ReadMe.md */; };
 		6498D4FF21A6431500B1391B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498D4FE21A6431500B1391B /* AppDelegate.swift */; };
 		6498D50121A6431500B1391B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6498D50021A6431500B1391B /* GameScene.sks */; };
 		6498D50521A6431500B1391B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498D50421A6431500B1391B /* GameScene.swift */; };
@@ -23,6 +28,11 @@
 
 /* Begin PBXFileReference section */
 		641C10E021B5286A00448A1C /* Obstacle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Obstacle.png; sourceTree = "<group>"; };
+		6485246E21B63269005879B4 /* GameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		6485247021B63BF4005879B4 /* Bensound-Buddy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bensound-Buddy.mp3"; sourceTree = "<group>"; };
+		6485247C21B64CBD005879B4 /* MySpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpriteNode.swift; sourceTree = "<group>"; };
+		6485247E21B65F6E005879B4 /* UpRising.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = UpRising.mp3; sourceTree = "<group>"; };
+		6485248121B66D76005879B4 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 		6498D4FB21A6431500B1391B /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6498D4FE21A6431500B1391B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6498D50021A6431500B1391B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -49,6 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6485246D21B63226005879B4 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				6498D51B21A644BD00B1391B /* GameConstant.swift */,
+				6485246E21B63269005879B4 /* GameHelper.swift */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
+		6485248021B66D68005879B4 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				6498D51021A6431700B1391B /* Info.plist */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		6498D4F221A6431500B1391B = {
 			isa = PBXGroup;
 			children = (
@@ -68,11 +95,13 @@
 		6498D4FD21A6431500B1391B /* FlappyBird */ = {
 			isa = PBXGroup;
 			children = (
-				6498D51621A6445D00B1391B /* Material */,
+				6485248021B66D68005879B4 /* Setting */,
 				6498D51721A6446900B1391B /* Storyboard */,
+				6485246D21B63226005879B4 /* Utilites */,
+				6498D51621A6445D00B1391B /* Material */,
 				6498D51821A6447E00B1391B /* ViewController */,
+				6485248121B66D76005879B4 /* ReadMe.md */,
 				6498D4FE21A6431500B1391B /* AppDelegate.swift */,
-				6498D51021A6431700B1391B /* Info.plist */,
 			);
 			path = FlappyBird;
 			sourceTree = "<group>";
@@ -80,6 +109,8 @@
 		6498D51621A6445D00B1391B /* Material */ = {
 			isa = PBXGroup;
 			children = (
+				6485247E21B65F6E005879B4 /* UpRising.mp3 */,
+				6485247021B63BF4005879B4 /* Bensound-Buddy.mp3 */,
 				641C10E021B5286A00448A1C /* Obstacle.png */,
 				6498D50B21A6431700B1391B /* Assets.xcassets */,
 				6498D51F21A65A9D00B1391B /* Penguin.atlas */,
@@ -119,8 +150,8 @@
 		6498D51A21A644AF00B1391B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6498D51B21A644BD00B1391B /* GameConstant.swift */,
 				6498D52121A65B3300B1391B /* PlayerNode.swift */,
+				6485247C21B64CBD005879B4 /* MySpriteNode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,7 +216,10 @@
 			files = (
 				6498D50A21A6431500B1391B /* Main.storyboard in Resources */,
 				6498D52021A65A9D00B1391B /* Penguin.atlas in Resources */,
+				6485247F21B65F6E005879B4 /* UpRising.mp3 in Resources */,
 				6498D52421A66BF600B1391B /* Trail.sks in Resources */,
+				6485248221B66D76005879B4 /* ReadMe.md in Resources */,
+				6485247121B63BF4005879B4 /* Bensound-Buddy.mp3 in Resources */,
 				641C10E121B5286B00448A1C /* Obstacle.png in Resources */,
 				6498D50121A6431500B1391B /* GameScene.sks in Resources */,
 				6498D50C21A6431700B1391B /* Assets.xcassets in Resources */,
@@ -201,10 +235,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6498D50521A6431500B1391B /* GameScene.swift in Sources */,
+				6485247D21B64CBD005879B4 /* MySpriteNode.swift in Sources */,
 				6498D51C21A644BD00B1391B /* GameConstant.swift in Sources */,
 				6498D50721A6431500B1391B /* GameViewController.swift in Sources */,
 				6498D4FF21A6431500B1391B /* AppDelegate.swift in Sources */,
 				6498D52221A65B3300B1391B /* PlayerNode.swift in Sources */,
+				6485246F21B63269005879B4 /* GameHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
