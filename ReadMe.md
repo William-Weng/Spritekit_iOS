@@ -1,5 +1,5 @@
-## FlappyBird - 水管還沒接上去
-![FlappyBird - 水管還沒接上去](./_Gif_/FlappyBird.gif)
+## FlappyBird - 大致上完工了，有音樂，有音效，會動…
+![FlappyBird - 大致上完工了，有音樂，有音效，會動…](./_Gif_/FlappyBird.gif)
 
 ## SpaceBattle - SpriteKit初體驗
 (參考出處： [(一)宇宙大戰 Space Battle — 新建場景Scene、精靈節點、Particle粒子及背景音樂 - ifiero](http://www.ifiero.com/index.php/archives/126))
