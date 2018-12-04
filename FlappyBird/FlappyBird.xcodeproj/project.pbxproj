@@ -109,11 +109,11 @@
 		6498D51621A6445D00B1391B /* Material */ = {
 			isa = PBXGroup;
 			children = (
+				6498D50B21A6431700B1391B /* Assets.xcassets */,
+				6498D51F21A65A9D00B1391B /* Penguin.atlas */,
 				6485247E21B65F6E005879B4 /* UpRising.mp3 */,
 				6485247021B63BF4005879B4 /* Bensound-Buddy.mp3 */,
 				641C10E021B5286A00448A1C /* Obstacle.png */,
-				6498D50B21A6431700B1391B /* Assets.xcassets */,
-				6498D51F21A65A9D00B1391B /* Penguin.atlas */,
 				6498D52321A66BF600B1391B /* Trail.sks */,
 			);
 			path = Material;
