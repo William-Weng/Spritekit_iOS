@@ -47,8 +47,8 @@
 ## SpriteKit_TexturePacker - 使用工具產生地圖
 ![SpriteKit_TexturePacker - 使用工具產生地圖](./_Gif_/SpriteKit_TexturePacker.png)
 
-## SpriteKit_TriangularNim - 兩個Node有交錯
-![SpriteKit_TriangularNim - 兩個Node有交錯](./_Gif_/SpriteKit_TriangularNim.gif)
+## SpriteKit_TriangularNim - 畫圈圈遊戲
+![SpriteKit_TriangularNim - 畫圈圈遊戲](./_Gif_/SpriteKit_TriangularNim.gif)
 
 
 

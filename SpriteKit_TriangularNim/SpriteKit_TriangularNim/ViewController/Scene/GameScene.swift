@@ -17,20 +17,45 @@ class GameScene: SKScene {
         static let None: UInt32 = 0x01 << 3
     }
     
+    /* 線段的顏色 */
+    enum LineColor: Int {
+        case first = 0
+        case second = 1
+        
+        func value() -> UIColor {
+            switch self {
+            case .first: return UIColor.blue
+            case .second: return UIColor.red
+            }
+        }
+        
+        func name() -> String {
+            switch self {
+            case .first: return "藍色"
+            case .second: return "紅色"
+            }
+        }
+    }
+    
     typealias LinePoint = (first: CGPoint?, next: CGPoint?)
     typealias LinearEquationParameter = (a: CGFloat, b: CGFloat)
     typealias IntersectionInCircle = (p1: CGPoint, p2: CGPoint)
     
     let NodeName = "Nim"
     let ImageName = (normal: "TouchNormal", selected: "TouchSelected")
+    var totalCount = 0
     
     var shapeNode: SKShapeNode?
     var linePoint: LinePoint = (nil, nil)
-    var linePath: CGPath? {
-        get { return drawLinePath()?.cgPath }
-    }
+    var linePath: CGPath? { get { return drawLinePath()?.cgPath } }
     
-    override func didMove(to view: SKView) {}
+    var nowNodeSet = Set<SKNode>()
+    var selectedNodeSet = Set<SKNode>()
+    var count = 1
+    
+    override func didMove(to view: SKView) {
+        nodesCount()
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -52,13 +77,17 @@ class GameScene: SKScene {
             return
         }
         
+        let lineColor: LineColor = (count % 2 != 0) ? .first : .second
+        
         linePoint.next = position
-        drawLine(with: .blue)
+        drawLine(with: lineColor.value())
         nimTest()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         linePoint = (nil, nil)
+        winRule()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -69,11 +98,17 @@ class GameScene: SKScene {
 // MARK: - 小工具
 extension GameScene {
     
+    /// 取得圓圓的總數量
+    private func nodesCount() {
+        enumerateChildNodes(withName: NodeName) { (node, _) in
+            self.totalCount += 1
+        }
+    }
+    
     /// 畫線
     private func drawLine(with color: UIColor) {
         
-        shapeNode?.removeFromParent()
-        shapeNode = nil
+        clearShapeNode()
         
         shapeNode = SKShapeNode()
         
@@ -88,8 +123,45 @@ extension GameScene {
     
     /// 測試上面的點有沒有被連到
     private func nimTest() {
+        
+        nowNodeSet.removeAll()
+        
         enumerateChildNodes(withName: NodeName) { (node, _) in
             self.touchedPointNode(node, point: self.linePoint)
+            self.drawLastSelectedNode(node)
+        }
+    }
+    
+    /// 畫上一次被選擇的點
+    private func drawLastSelectedNode(_ node: SKNode) {
+        
+        for selectedNode in self.selectedNodeSet {
+            if node == selectedNode, let node = node as? SKSpriteNode {
+                node.texture = SKTexture(imageNamed: self.ImageName.selected)
+            }
+        }
+    }
+    
+    /// 贏的規則 (至少要畫1~3個，如果有包含之前畫的就不算)
+    private func winRule() {
+        
+        guard 1...3 ~= nowNodeSet.count,
+              let lineNode = shapeNode?.copy() as? SKShapeNode
+        else {
+            clearShapeNode(); return
+        }
+        
+        for node in nowNodeSet {
+            if selectedNodeSet.contains(node) { clearShapeNode(); return }
+            selectedNodeSet.insert(node)
+        }
+        
+        count += 1
+        addChild(lineNode)
+        
+        if (selectedNodeSet.count >= totalCount - 1) {
+            let lineColor = LineColor(rawValue: (count - 1) % 2)
+            showAlert(message: "\(lineColor!.name()) 獲勝")
         }
     }
 }
@@ -118,6 +190,12 @@ extension GameScene {
         return bezierPath
     }
     
+    /// 清除不要的線
+    private func clearShapeNode() {
+        shapeNode?.removeFromParent()
+        shapeNode = nil
+    }
+    
     /// 求出直線方程式 (y = ax + b) 與圓型方程式 ((x-x0)^2 + (y-y0)^2 = r^2) 的聯立解
     /// (a^2 + 1)x^2 + 2(a*b - a*y0 - x0)x + (x0^2 + y0^2 + b^2 - r^2 - 2*b*y0)
     /// 感謝 Kevin-Wang
@@ -132,7 +210,7 @@ extension GameScene {
         }
         
         let (a, b) = linearEquationParameter
-        
+
         firstNodeInCircle(myNode, a: a, b: b, center: nodeCenter, r: radius)
         otherNodeInCircle(myNode, point: point, a: a, b: b, center: nodeCenter, r: radius)
     }
@@ -158,8 +236,7 @@ extension GameScene {
         return length
     }
     
-    
-    /// 求出直線在該圓上的交點 (x = -B ± √(B^2 - 4AC) / 2A & y = ax + b)
+    /// 求出直線在該圓上的交點 (x = -B ± √(B^2 - 4AC) / 2A 與 y = ax + b)
     private func findIntersectionOnCircle(a: CGFloat, b: CGFloat, center: CGPoint, r: CGFloat) -> IntersectionInCircle? {
         
         let (x0, y0) = (center.x, center.y)
@@ -182,7 +259,7 @@ extension GameScene {
         return intersectionInCircle
     }
     
-    /// 求出二方一次方程式的因子 (b^2 - 4*a*c)
+    /// 求出二方一次方程式的因子 (b^2 - 4ac)
     private func findFactor(a: CGFloat, b: CGFloat, x0: CGFloat, y0: CGFloat, r: CGFloat) -> CGFloat {
         
         let A = a * a + 1
@@ -238,9 +315,23 @@ extension GameScene {
         let minPoint = (lengthP1 > lengthP2) ? intersection.p2 : intersection.p1
         
         let isRightDirection = (x1...x2 ~= minPoint.x) || (y1...y2 ~= minPoint.y)
-        
+                
         if ((lengthForLine >= minLength) && isRightDirection) {
             node.texture = SKTexture(imageNamed: ImageName.selected)
+            nowNodeSet.insert(node)
         }
+    }
+    
+    /// 顯示提示框
+    private func showAlert(message: String) {
+        
+        let viewController = view?.window?.rootViewController
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        let aciton = UIAlertAction(title: "再玩一次", style: .default) { _ in
+            GameHelper.shared.transferScene(from: self, to: GameConstant.SceneName.game.rawValue)
+        }
+        
+        alert.addAction(aciton)
+        viewController?.present(alert, animated: true, completion: nil)
     }
 }

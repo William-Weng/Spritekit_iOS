@@ -18,24 +18,7 @@ class GameHelper: NSObject {
     }
     
     private override init() {}
-    
-    /// 設定遊戲分數
-    public func setScore(with score: Int, for key: ScoreKey) {
         
-        let userDefault = UserDefaults.standard
-        userDefault.set(score, forKey: key.rawValue)
-        userDefault.synchronize()
-    }
-    
-    /// 取得遊戲分數
-    public func getScore(for key: ScoreKey) -> Int {
-        
-        let userDefault = UserDefaults.standard
-        let score = userDefault.integer(forKey: key.rawValue)
-        
-        return score
-    }
-    
     /// 場景轉換
     public func transferScene(from oldScene: SKScene, to sceneName: String) {
         
